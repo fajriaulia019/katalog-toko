@@ -10,7 +10,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="antialiased bg-[--color-bg] text-[--color-text-main]">
+<body class="antialiased bg-bg text-text-main">
     <div class="min-h-screen">
         @yield('content')
     </div>

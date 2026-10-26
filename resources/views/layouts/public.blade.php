@@ -10,19 +10,19 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="antialiased bg-[--color-bg] text-[--color-text-main]">
+<body class="antialiased bg-bg text-text-main">
     <div class="min-h-screen flex flex-col">
         {{-- Navbar --}}
-        <nav class="bg-[--color-surface] border-b border-[--color-border-custom]">
+        <nav class="bg-surface border-b border-border-custom">
             <div class="container mx-auto px-4 py-4">
                 <div class="flex justify-between items-center">
-                    <a href="/" class="text-2xl font-bold text-[--color-primary]">
+                    <a href="/" class="text-2xl font-bold text-primary">
                         {{ config('app.name', 'Katalog Parfum') }}
                     </a>
                     <div class="hidden md:flex space-x-6">
-                        <a href="/" class="text-[--color-text-main] hover:text-[--color-primary] transition-colors duration-200">Home</a>
-                        <a href="#" class="text-[--color-text-main] hover:text-[--color-primary] transition-colors duration-200">Katalog</a>
-                        <a href="#" class="text-[--color-text-main] hover:text-[--color-primary] transition-colors duration-200">Tentang Kami</a>
+                        <a href="/" class="text-text-main hover:text-primary transition-colors duration-200">Home</a>
+                        <a href="#" class="text-text-main hover:text-primary transition-colors duration-200">Katalog</a>
+                        <a href="#" class="text-text-main hover:text-primary transition-colors duration-200">Tentang Kami</a>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
         </main>
 
         {{-- Footer --}}
-        <footer class="bg-[--color-primary-dark] text-white py-8">
+        <footer class="bg-primary-dark text-white py-8">
             <div class="container mx-auto px-4">
                 <div class="text-center">
                     <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>

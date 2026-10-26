@@ -10,20 +10,20 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="antialiased bg-gray-100 text-[--color-text-main]">
+<body class="antialiased bg-gray-100 text-text-main">
     <div class="min-h-screen flex flex-col">
         {{-- Admin Navigation --}}
-        <nav class="bg-[--color-primary-dark] text-white">
+        <nav class="bg-primary-dark text-white">
             <div class="container mx-auto px-4 py-4">
                 <div class="flex justify-between items-center">
                     <a href="/admin" class="text-xl font-bold">
                         Admin Panel - {{ config('app.name') }}
                     </a>
                     <div class="flex space-x-4">
-                        <a href="/admin/products" class="hover:text-[--color-accent] transition-colors duration-200">Products</a>
+                        <a href="/admin/products" class="hover:text-accent transition-colors duration-200">Products</a>
                         <form method="POST" action="/logout" class="inline">
                             @csrf
-                            <button type="submit" class="hover:text-[--color-accent] transition-colors duration-200">Logout</button>
+                            <button type="submit" class="hover:text-accent transition-colors duration-200">Logout</button>
                         </form>
                     </div>
                 </div>
