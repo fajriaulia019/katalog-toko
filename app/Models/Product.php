@@ -56,7 +56,7 @@ class Product extends Model
     public function scopeBestSeller(Builder $query): void
     {
         $query->where('is_best_seller', true)
-            ->where('status', 'available');
+            ->whereIn('status', ['available', 'out_of_stock']);
     }
 
     /**
@@ -66,7 +66,7 @@ class Product extends Model
     public function scopeRecentlyAdded(Builder $query, int $days = 14): void
     {
         $query->where('created_at', '>=', now()->subDays($days))
-            ->where('status', 'available')
+            ->whereIn('status', ['available', 'out_of_stock'])
             ->orderByDesc('created_at');
     }
 

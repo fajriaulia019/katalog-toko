@@ -162,4 +162,20 @@
         </div>
     @endif
 
+    <section class="bg-bg py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid gap-8 rounded-3xl bg-primary-dark px-6 py-10 text-white sm:px-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+                <div>
+                    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-accent">Kunjungi Toko Kami</p>
+                    <h2 class="mt-3 text-3xl font-bold">Temukan aroma yang paling cocok untuk Anda.</h2>
+                    <p class="mt-4 max-w-2xl leading-7 text-white/75">Butuh rekomendasi atau ingin mencoba langsung? Kami siap membantu Anda memilih parfum terbaik.</p>
+                </div>
+                <div class="flex flex-col gap-3 sm:flex-row lg:justify-end">
+                    <a href="{{ route('about') }}#kontak" class="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 font-semibold text-primary hover:bg-primary-light">Alamat & Jam Buka</a>
+                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-xl border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white/10">Hubungi WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 @endsection

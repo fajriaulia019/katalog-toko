@@ -48,7 +48,21 @@
         {{-- Footer --}}
         <footer class="bg-primary-dark text-white py-8">
             <div class="container mx-auto px-4">
-                <div class="text-center">
+                <div class="grid gap-8 md:grid-cols-3">
+                    <div>
+                        <p class="text-xl font-bold">{{ config('app.name') }}</p>
+                        <p class="mt-3 text-sm leading-6 text-white/70">Katalog parfum pilihan untuk membantu Anda menemukan aroma yang tepat.</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold">Kunjungi Kami</p>
+                        <p class="mt-3 text-sm leading-6 text-white/70">Jl. Contoh No. 123, Kota Contoh<br>Senin–Jumat, 08.00–21.00</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold">Kontak</p>
+                        <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block text-sm text-white/70 hover:text-white">WhatsApp +62 812-3456-7890</a>
+                    </div>
+                </div>
+                <div class="mt-8 border-t border-white/10 pt-6 text-center text-sm text-white/60">
                     <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
                 </div>
             </div>

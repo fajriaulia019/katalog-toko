@@ -18,11 +18,14 @@
     {{-- Product Count Bar --}}
     <div class="bg-surface border-b border-border-custom py-4">
         <div class="container mx-auto px-4">
-            <p class="text-sm text-text-muted">
-                Menampilkan <span
-                    class="font-semibold text-text-main">{{ $products->firstItem() }}–{{ $products->lastItem() }}</span>
-                dari <span class="font-semibold text-text-main">{{ $products->total() }}</span> produk
-            </p>
+            @if ($products->total() > 0)
+                <p class="text-sm text-text-muted">
+                    Menampilkan <span class="font-semibold text-text-main">{{ $products->firstItem() }}–{{ $products->lastItem() }}</span>
+                    dari <span class="font-semibold text-text-main">{{ $products->total() }}</span> produk
+                </p>
+            @else
+                <p class="text-sm text-text-muted">Belum ada produk yang tersedia.</p>
+            @endif
         </div>
     </div>
 
@@ -61,11 +64,11 @@
             <h2 class="text-3xl font-bold mb-4">Butuh Bantuan Memilih Parfum?</h2>
             <p class="text-lg mb-8 text-white/90">Tim kami siap membantu Anda menemukan aroma yang sempurna</p>
             <div class="flex flex-wrap gap-4 justify-center">
-                <a href="#"
+                <a href="{{ route('about') }}#kontak"
                     class="px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-accent hover:text-white transition-all duration-300 shadow-lg">
                     Hubungi Kami
                 </a>
-                <a href="#"
+                <a href="{{ route('about') }}#kontak"
                     class="px-8 py-4 bg-primary-dark/50 backdrop-blur-sm text-white font-semibold rounded-lg border-2 border-white/30 hover:bg-white/10 transition-all duration-300">
                     Kunjungi Toko
                 </a>

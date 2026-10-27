@@ -89,7 +89,7 @@
         </div>
 
         {{-- Tombol Hubungi Toko --}}
-        <a href="{{ route('catalog') }}"
+        <a href="{{ $productId ? route('product.show', $productId) : route('catalog') }}"
             class="block w-full text-center mt-1 px-4 py-2 bg-primary/10 text-primary rounded-lg font-semibold hover:bg-primary hover:text-white transition-all duration-300">
             Lihat Detail
         </a>
