@@ -20,7 +20,7 @@
                     Temukan aroma terbaik untuk menyempurnakan hari Anda. Jelajahi koleksi lengkap kami.
                 </p>
                 <div class="flex gap-4 flex-wrap pt-4">
-                    <a href="#katalog" class="px-8 py-4 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-dark hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <a href="{{ route('catalog') }}" class="px-8 py-4 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-dark hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                         Lihat Produk Kami
                     </a>
                     <a href="#tentang" class="px-8 py-4 bg-surface text-primary font-semibold rounded-lg border-2 border-primary hover:bg-primary-light/30 transition-all duration-300 shadow-md">
