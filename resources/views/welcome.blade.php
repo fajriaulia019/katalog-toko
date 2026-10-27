@@ -2,28 +2,28 @@
 
 @section('content')
 {{-- Hero Section --}}
-<div class="relative bg-gradient-to-br from-primary-dark via-primary to-primary-light overflow-hidden">
+<div class="relative bg-gradient-to-br from-primary-light via-bg to-surface overflow-hidden">
     {{-- Background Decorative Elements --}}
     <div class="absolute inset-0 opacity-20">
         <div class="absolute top-20 right-20 w-72 h-72 bg-accent rounded-full blur-3xl"></div>
         <div class="absolute bottom-20 left-20 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
     </div>
     
-    <div class="container mx-auto px-4 pt-32 pb-16 md:pt-40 md:pb-24 relative">
+    <div class="container mx-auto px-4 py-16 md:py-24 relative">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {{-- Left Content --}}
             <div class="space-y-6">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-dark leading-tight">
                     Katalog Parfum Eksklusif
                 </h1>
-                <p class="text-lg md:text-xl text-white/80 leading-relaxed">
+                <p class="text-lg md:text-xl text-text-muted leading-relaxed">
                     Temukan aroma terbaik untuk menyempurnakan hari Anda. Jelajahi koleksi lengkap kami.
                 </p>
                 <div class="flex gap-4 flex-wrap pt-4">
-                    <a href="#katalog" class="px-8 py-4 bg-accent text-white font-semibold rounded-lg shadow-lg hover:bg-accent/90 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <a href="#katalog" class="px-8 py-4 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-dark hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                         Lihat Produk Kami
                     </a>
-                    <a href="#tentang" class="px-8 py-4 bg-white/10 text-white font-semibold rounded-lg border-2 border-white/40 hover:bg-white/20 transition-all duration-300 backdrop-blur-sm">
+                    <a href="#tentang" class="px-8 py-4 bg-surface text-primary font-semibold rounded-lg border-2 border-primary hover:bg-primary-light/30 transition-all duration-300 shadow-md">
                         Tentang Kami
                     </a>
                 </div>
