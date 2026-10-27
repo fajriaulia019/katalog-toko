@@ -2,14 +2,14 @@
 
 @section('content')
 {{-- Hero Section --}}
-<div class="relative bg-gradient-to-br from-primary-light via-bg to-surface overflow-hidden">
+<div class="relative bg-gradient-to-br from-primary-light via-bg to-surface overflow-hidden min-h-screen flex items-center">
     {{-- Background Decorative Elements --}}
     <div class="absolute inset-0 opacity-20">
         <div class="absolute top-20 right-20 w-72 h-72 bg-accent rounded-full blur-3xl"></div>
         <div class="absolute bottom-20 left-20 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
     </div>
     
-    <div class="container mx-auto px-4 py-16 md:py-24 relative">
+    <div class="container mx-auto px-4 pt-28 pb-20 md:pt-32 md:pb-24 relative w-full">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {{-- Left Content --}}
             <div class="space-y-6">
