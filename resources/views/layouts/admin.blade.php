@@ -16,12 +16,12 @@
         <nav class="bg-primary-dark text-white">
             <div class="container mx-auto px-4 py-4">
                 <div class="flex justify-between items-center">
-                    <a href="/admin" class="text-xl font-bold">
+                    <a href="{{ route('admin.dashboard') }}" class="text-xl font-bold">
                         Admin Panel - {{ config('app.name') }}
                     </a>
                     <div class="flex space-x-4">
-                        <a href="/admin/products" class="hover:text-accent transition-colors duration-200">Products</a>
-                        <form method="POST" action="/logout" class="inline">
+                        <a href="{{ route('admin.products.index') }}" class="hover:text-accent transition-colors duration-200">Products</a>
+                        <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
                             <button type="submit" class="hover:text-accent transition-colors duration-200">Logout</button>
                         </form>
@@ -39,5 +39,6 @@
     </div>
 
     @livewireScripts
+    @stack('scripts')
 </body>
 </html>

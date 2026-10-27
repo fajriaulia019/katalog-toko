@@ -2,120 +2,121 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Models\Product;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
+use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
+use RuntimeException;
+use Throwable;
 
 class ProductController extends Controller
 {
-    public function index()
+    private const IMAGE_DISK = 'public';
+
+    public function index(): View
     {
-        $products = Product::orderBy('created_at', 'desc')
+        $products = Product::query()
+            ->latest()
             ->paginate(10);
-            
+
         return view('admin.products.index', compact('products'));
     }
 
-    public function create()
+    public function create(): View
     {
         return view('admin.products.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreProductRequest $request): RedirectResponse
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'brand' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'size' => 'required|string',
-            'image' => 'nullable|image|max:2048', // max 2MB
-            'status' => 'required|in:available,out_of_stock,discontinued',
-            'is_best_seller' => 'nullable|boolean',
-        ]);
+        $data = $request->validated();
+        $imagePath = $this->storeImage($request->file('image'));
+        $data['image_path'] = $imagePath;
+        $data['is_best_seller'] = $request->boolean('is_best_seller');
+        unset($data['image']);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+        try {
+            Product::create($data);
+        } catch (Throwable $exception) {
+            $this->deleteImage($imagePath);
+            throw $exception;
         }
 
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imagePath = Storage::disk('public')->putFile('products', $image);
-        }
-
-        Product::create([
-            'name' => $request->name,
-            'brand' => $request->brand,
-            'description' => $request->description,
-            'price' => $request->price,
-            'size' => $request->size,
-            'image_path' => $imagePath,
-            'status' => $request->status,
-            'is_best_seller' => $request->is_best_seller ?? false,
-        ]);
-
-        return redirect()->route('admin.products.index')->with('success', 'Product created successfully');
+        return redirect()
+            ->route('admin.products.index')
+            ->with('success', 'Produk berhasil ditambahkan.');
     }
 
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         return view('admin.products.edit', compact('product'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'brand' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'size' => 'required|string',
-            'image' => 'nullable|image|max:2048',
-            'status' => 'required|in:available,out_of_stock,discontinued',
-            'is_best_seller' => 'nullable|boolean',
-        ]);
+        $data = $request->validated();
+        $oldImagePath = $product->image_path;
+        $newImagePath = $request->hasFile('image')
+            ? $this->storeImage($request->file('image'))
+            : $oldImagePath;
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        $data['image_path'] = $newImagePath;
+        $data['is_best_seller'] = $request->boolean('is_best_seller');
+        unset($data['image']);
 
-        if ($request->hasFile('image')) {
-            // Delete old image
-            if ($product->image_path) {
-                Storage::disk('public')->delete($product->image_path);
+        try {
+            $product->update($data);
+        } catch (Throwable $exception) {
+            if ($newImagePath !== $oldImagePath) {
+                $this->deleteImage($newImagePath);
             }
 
-            $image = $request->file('image');
-            $imagePath = Storage::disk('public')->putFile('products', $image);
-        } else {
-            $imagePath = $product->image_path;
+            throw $exception;
         }
 
-        $product->update([
-            'name' => $request->name,
-            'brand' => $request->brand,
-            'description' => $request->description,
-            'price' => $request->price,
-            'size' => $request->size,
-            'image_path' => $imagePath,
-            'status' => $request->status,
-            'is_best_seller' => $request->is_best_seller ?? false,
-        ]);
+        if ($newImagePath !== $oldImagePath) {
+            $this->deleteImage($oldImagePath);
+        }
 
-        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully');
+        return redirect()
+            ->route('admin.products.index')
+            ->with('success', 'Produk berhasil diperbarui.');
     }
 
-    public function destroy(Product $product)
+    public function destroy(Product $product): RedirectResponse
     {
-        // Delete image file
-        if ($product->image_path) {
-            Storage::disk('public')->delete($product->image_path);
+        $imagePath = $product->image_path;
+        $product->delete();
+        $this->deleteImage($imagePath);
+
+        return redirect()
+            ->route('admin.products.index')
+            ->with('success', 'Produk berhasil dihapus.');
+    }
+
+    private function storeImage(?UploadedFile $image): ?string
+    {
+        if ($image === null) {
+            return null;
         }
 
-        $product->delete();
-        return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully');
+        $path = $image->store('products', self::IMAGE_DISK);
+
+        if ($path === false) {
+            throw new RuntimeException('Gambar produk gagal disimpan.');
+        }
+
+        return $path;
+    }
+
+    private function deleteImage(?string $path): void
+    {
+        if ($path !== null && $path !== '') {
+            Storage::disk(self::IMAGE_DISK)->delete($path);
+        }
     }
 }

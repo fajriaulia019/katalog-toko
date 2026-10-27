@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use LogicException;
 
 class AdminSeeder extends Seeder
 {
@@ -16,12 +17,19 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
+        $email = env('ADMIN_EMAIL');
+        $password = env('ADMIN_PASSWORD');
+
+        if (! is_string($email) || $email === '' || ! is_string($password) || $password === '') {
+            throw new LogicException('Set ADMIN_EMAIL and ADMIN_PASSWORD in the environment before seeding the admin account.');
+        }
+
         User::updateOrCreate(
-            ['email' => 'admin@example.com'],
+            ['email' => $email],
             [
                 'name' => 'Admin',
-                'email' => 'admin@example.com',
-                'password' => Hash::make('admin123'),
+                'email' => $email,
+                'password' => Hash::make($password),
             ]
         );
     }
