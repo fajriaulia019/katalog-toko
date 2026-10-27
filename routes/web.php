@@ -8,3 +8,7 @@ Route::get('/', function () {
 });
 
 Route::get('/katalog', CatalogController::class)->name('catalog');
+
+Route::get('/tentang-kami', function () {
+    return view('pages.about');
+})->name('about');

@@ -22,7 +22,7 @@
                     <div class="hidden md:flex space-x-6">
                         <a href="/" id="nav-link-home" class="nav-link text-primary hover:text-primary-dark transition-colors duration-200 font-medium">Home</a>
                         <a href="{{ route('catalog') }}" class="nav-link text-primary hover:text-primary-dark transition-colors duration-200 font-medium">Katalog</a>
-                        <a href="#" class="nav-link text-primary hover:text-primary-dark transition-colors duration-200 font-medium">Tentang Kami</a>
+                        <a href="{{ route('about') }}" class="nav-link text-primary hover:text-primary-dark transition-colors duration-200 font-medium">Tentang Kami</a>
                     </div>
                     {{-- Mobile menu button --}}
                     <button id="mobile-menu-btn" class="md:hidden text-primary-dark focus:outline-none">
@@ -35,7 +35,7 @@
                 <div id="mobile-menu" class="hidden md:hidden mt-4 pb-2 space-y-2">
                     <a href="/" class="block nav-link text-primary hover:text-primary-dark py-2 transition-colors duration-200 font-medium">Home</a>
                     <a href="{{ route('catalog') }}" class="block nav-link text-primary hover:text-primary-dark py-2 transition-colors duration-200 font-medium">Katalog</a>
-                    <a href="#" class="block nav-link text-primary hover:text-primary-dark py-2 transition-colors duration-200 font-medium">Tentang Kami</a>
+                    <a href="{{ route('about') }}" class="block nav-link text-primary hover:text-primary-dark py-2 transition-colors duration-200 font-medium">Tentang Kami</a>
                 </div>
             </div>
         </nav>
